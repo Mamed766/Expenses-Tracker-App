@@ -28,17 +28,16 @@ function ManageExpense({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttons}>
+        <Button style={styles.button} mode="flat" onPress={cancelHandler}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={confirmHandler}>
+          {isEditing ? "Update" : "Add"}
+        </Button>
+      </View>
       {isEditing && (
         <View style={styles.deleteContainer}>
-          <View style={styles.buttons}>
-            <Button style={styles.button} mode="flat" onPress={cancelHandler}>
-              Cancel
-            </Button>
-            <Button style={styles.button} onPress={confirmHandler}>
-              {isEditing ? "Update" : "Add"}
-            </Button>
-          </View>
-
           <IconButton
             icon="trash"
             color={GlobalStyles.colors.error500}
