@@ -53,7 +53,19 @@ const DUMMY_EXPENSES = [
     id: "e9",
     description: "Another book",
     amount: 44,
-    date: new Date("2020-08-11"),
+    date: new Date("2020-04-10"),
+  },
+  {
+    id: "e10",
+    description: "Anotheraa book",
+    amount: 44,
+    date: new Date("2025-04-11"),
+  },
+  {
+    id: "e11",
+    description: "Neww book",
+    amount: 44,
+    date: new Date("2025-04-10"),
   },
 ];
 
@@ -61,7 +73,7 @@ export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({ description, amount, date }) => {},
   deleteExpense: (id) => {},
-  updateExpens: (id, { description, amount, date }) => {},
+  updateExpense: (id, { description, amount, date }) => {},
 });
 
 function expensesReducer(state, action) {
