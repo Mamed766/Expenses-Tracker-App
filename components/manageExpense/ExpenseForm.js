@@ -5,7 +5,7 @@ function ExpenseForm() {
   function amountChangedHandler() {}
 
   return (
-    <View>
+    <View style={styles.form}>
       <View style={styles.inputsRow}>
         <Input
           label="Amount"
@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
   inputsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  form: {
+    marginTop: 80,
   },
   rowInput: {
     flex: 1,

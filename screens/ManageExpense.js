@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     minWidth: 120,
     marginHorizontal: 8,
   },
+
   deleteContainer: {
     marginTop: 16,
     padding: 8,
