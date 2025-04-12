@@ -3,10 +3,16 @@ import Input from "./Input";
 import { useState } from "react";
 
 function ExpenseForm() {
-  const [amountValue, setAmountValue] = useState("");
+  const [inputValue, setInputValues] = useState({
+    amount: "",
+    date: "",
+    description: "",
+  });
 
-  function amountChangedHandler(enteredAmount) {
-    setAmountValue(enteredAmount);
+  function inputChangedHandler(inputIdentifier, enteredValue) {
+    setInputValues((currInputValues) => {
+      return { ...currInputValues, [inputIdentifier]: enteredValue };
+    });
   }
 
   return (
@@ -19,8 +25,8 @@ function ExpenseForm() {
           style={styles.rowInput}
           textInputConfig={{
             keyboardType: "decimal-pad",
-            onChangeText: amountChangedHandler,
-            value: amountValue,
+            onChangeText: inputChangedHandler.bind(this, "amount"),
+            value: inputValue.amount,
           }}
         />
         <Input
@@ -29,7 +35,8 @@ function ExpenseForm() {
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChangeText: () => {},
+            onChangeText: inputChangedHandler.bind(this, "date"),
+            value: inputValue.date,
           }}
         />
       </View>
@@ -40,6 +47,8 @@ function ExpenseForm() {
             multiline: true,
             //   autoCapitalize: none
             // autoCorrect: false,
+            onChangeText: inputChangedHandler.bind(this, "description"),
+            value: inputValue.description,
           }}
         />
       </View>
