@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import Input from "./Input";
 import { useState } from "react";
+import Button from "../UI/Button";
 
-function ExpenseForm() {
-  const [inputValue, setInputValues] = useState({
+function ExpenseForm({ submitButtonLabel, onCancel, onSubmit }) {
+  const [inputValues, setInputValues] = useState({
     amount: "",
     date: "",
     description: "",
@@ -13,6 +14,16 @@ function ExpenseForm() {
     setInputValues((currInputValues) => {
       return { ...currInputValues, [inputIdentifier]: enteredValue };
     });
+  }
+
+  function submitHandler() {
+    const expenseData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
+
+    onSubmit(expenseData);
   }
 
   return (
@@ -26,7 +37,7 @@ function ExpenseForm() {
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: inputChangedHandler.bind(this, "amount"),
-            value: inputValue.amount,
+            value: inputValues.amount,
           }}
         />
         <Input
@@ -36,7 +47,7 @@ function ExpenseForm() {
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
             onChangeText: inputChangedHandler.bind(this, "date"),
-            value: inputValue.date,
+            value: inputValues.date,
           }}
         />
       </View>
@@ -48,9 +59,18 @@ function ExpenseForm() {
             //   autoCapitalize: none
             // autoCorrect: false,
             onChangeText: inputChangedHandler.bind(this, "description"),
-            value: inputValue.description,
+            value: inputValues.description,
           }}
         />
+      </View>
+
+      <View style={styles.buttons}>
+        <Button style={styles.button} mode="flat" onPress={onCancel}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={submitHandler}>
+          {submitButtonLabel}
+        </Button>
       </View>
     </View>
   );
@@ -75,5 +95,14 @@ const styles = StyleSheet.create({
   },
   rowInput: {
     flex: 1,
+  },
+  buttons: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8,
   },
 });
